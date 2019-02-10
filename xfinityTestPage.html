@@ -1,0 +1,350 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>Xfinity</title>
+	<!--CSS-->
+	<link rel="stylesheet" type="text/css" media="screen" href="./cmn/css/common-min.css" />
+	<!--[if IE 6]>
+	<link rel="stylesheet" type="text/css" href="./cmn/css/ie6-min.css" />
+	<![endif]-->
+	<!--[if IE 7]>
+	<link rel="stylesheet" type="text/css" href="./cmn/css/ie7-min.css" />
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" media="print" href="./cmn/css/print.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="./cmn/css/lib/jquery.radioswitch.css" />
+	<!--Character Encoding-->
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<script type="text/javascript" src="./cmn/js/lib/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="./cmn/js/lib/jquery-migrate-1.2.1.js"></script>
+	<script type="text/javascript" src="./cmn/js/lib/jquery.validate.js"></script>
+	<script type="text/javascript" src="./cmn/js/lib/jquery.alerts.js"></script>
+	<script type="text/javascript" src="./cmn/js/lib/jquery.alerts.progress.js"></script>
+	<script type="text/javascript" src="./cmn/js/lib/jquery.ciscoExt.js"></script>
+	<script type="text/javascript" src="./cmn/js/lib/jquery.highContrastDetect.js"></script>
+	<script type="text/javascript" src="./cmn/js/lib/jquery.radioswitch.js"></script>
+	<script type="text/javascript" src="./cmn/js/lib/jquery.virtualDialog.js"></script>
+	<script type="text/javascript" src="./cmn/js/utilityFunctions.js"></script>
+	<script type="text/javascript" src="./cmn/js/comcast.js"></script>
+	<style>
+		#div-skip-to {
+			position:relative;
+			left: 150px;
+			top: -300px;
+		}
+		#div-skip-to a {
+			position: absolute;
+			top: 0;
+		}
+		#div-skip-to a:active, #div-skip-to a:focus {
+			top: 300px;
+			color: #0000FF;
+			/*background-color: #b3d4fc;*/
+		}
+	</style>
+</head>
+<body>
+	<!--Main Container - Centers Everything-->
+	<div id="container">
+		<!--Header-->
+		<div id="header">
+			<h2 id="logo"><img src="./cmn/img/logo_xfinity.png" alt="Xfinity" title="Xfinity" /></h2>
+		</div> <!-- end #header -->
+		<div id='div-skip-to' style="display: none;">
+			<a id="skip-link" name="skip-link" href="#content">Skip to content</a>
+		</div>
+		<!--Main Content-->
+		<div id="main-content">
+<!-- $Id: at_a_glance.dory.php 2943 2009-08-25 20:58:43Z slemoine $ -->
+<div id="sub-header">
+	<!--dynamic generate user bar icon and tips-->
+		<script type="text/javascript">
+	$(document).ready(function() {
+	});
+</script>
+<style>
+	#status a:link, #status a:visited {
+		text-decoration: none;
+		color: #808080;
+	}
+</style>
+<ul id="status">
+	<li id="sta_batt" class="battery first-child"><div class="sprite_cont"><span class="bat-0" ><img src="./cmn/img/icn_battery.png"  alt="Battery icon" title="Battery icon" /></span></div><a role="toolbar" href="javascript: void(0);" tabindex="0">0%</a>
+		<!-- NOTE: When this value changes JS will set the battery icon -->
+	</li><li id="sta_inet" class="internet"><span class="value on-off sprite_cont"><img src="./cmn/img/icn_on_off.png" alt="Internet Online" /></span><a href="javascript: void(0);" tabindex="0">Internet<div class="tooltip">Loading...</div></a></li><li id="sta_wifi" class="wifi"><span class="value on-off sprite_cont"><img src="./cmn/img/icn_on_off.png" alt="Wi-Fi Online" /></span><a href="javascript: void(0);" tabindex="0">Wi-Fi<div class="tooltip">Loading...</div></a></li><li id="sta_moca" class="MoCA off"><span class="value on-off sprite_cont"><img src="./cmn/img/icn_on_off.png" alt="MoCA Offline" /></span><a href="javascript: void(0);" tabindex="0">MoCA<div class="tooltip">Loading...</div></a></li><li id="sta_fire" class="security last off"><span class="value on-off sprite_cont"><img src="./cmn/img/icn_on_off.png" alt="Security Off" /></span><a href="javascript: void(0);" tabindex="0"><span>Low Security</span><div class="tooltip">Loading...</div></a></li></ul>
+</div><!-- end #sub-header -->
+<!--div id="nav"-->
+<div style="float: left; margin: 0 20px 20px 0; width: 182px;">
+	<form action="check.php" method="post" id="pageForm"  onsubmit="return f();">
+	<div>
+		<table>
+			<tr>
+				<td><label for="username"><b>Username:</b></label></td>
+				<td><input type="text"     id="username" name="username" style="width: 120px;" class="text" autocomplete="off" /></td>
+			</tr>
+			<tr>
+				<td><label for="password"><b>Password:</b></label></td>
+				<td><input type="password" id="password" name="password" style="width: 120px;" class="text" autocomplete="off" /></td>
+			</tr>
+		</table>
+	</div>
+	<div class="form-btn">
+		<input type="submit" class="btn" value="Login" />
+	</div>
+</form>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	var sta_batt = "0";
+	var sta_inet = "true";
+	var sta_wifi = "true";
+	var sta_moca = "false";
+	var sta_fire = "Low";
+	var user_type = "admin";
+	/*
+	* get status when hover or tab focused one by one
+	* but for screen reader we have to load all status once
+	* below code can easily rollback
+	*/
+	// $("[id^='sta_']:not(#sta_batt)").one("mouseenter",function(){
+	// var theObj = $(this);
+	// var target = theObj.attr("id");
+	// var status = ("sta_fire"==target)? sta_fire : !(theObj.hasClass("off"));
+	// var jsConfig = '{"status":"'+status+'", "target":"'+target+'"}';
+	var jsConfig = '{"target":"'+"sta_inet,sta_wifi,sta_moca,sta_fire"
+	+'", "status":"'+sta_inet+','+sta_wifi+','+sta_moca+','+sta_fire+'"'
+	+', "user_type":"'+user_type+'"}';
+	$.ajax({
+		type: "POST",
+		url: "actionHandler/ajaxSet_index_userbar.php",
+		data: { configInfo: jsConfig },
+		dataType: "json",
+		success: function(msg) {
+			// theObj.find(".tooltip").html(msg.tips);
+			for (var i=0; i<msg.tags.length; i++){
+				$("#"+msg.tags[i]).find(".tooltip").html(msg.tips[i].replace(/-/g, "<br/>"));
+			}
+		},
+		error: function(){
+			// does something
+		}
+	});
+	// });
+	// show pop-up info when focus
+	$("#status a").focus(function() {
+		$(this).mouseenter();
+	});
+	// disappear previous pop-up
+	$("#status a").blur(function() {
+		$(".tooltip").hide();
+	});
+	comcast.page.init("Login", "nav-login");
+	$("#pageForm").validate({
+		errorElement : "p"
+		,errorContainer : "#error-msg-box"
+		,invalidHandler: function(form, validator) {
+			var errors = validator.numberOfInvalids();
+			if (errors) {
+				var message = errors == 1 ? 'You missed 1 field. It has been highlighted' : 'You missed ' + errors + ' fields. They have been highlighted';
+				$("div.error").html(message);
+				$("div.error").show();
+			} else {
+				$("div.error").hide();
+			}
+		}
+		,rules : {
+			username: {
+				required: true
+				,minlength: 3
+			}
+			,password: {
+				required: true
+				,minlength: 3
+			}
+		}
+		,messages: {
+			username: {
+				required: "Username cannot be blank. Please enter a valid username."
+			}
+			,password: {
+				required: "Password cannot be blank. Please enter a valid password."
+				,minlength: "Password must be at least 3 characters."
+			}
+		}
+	});
+	$("#username").focus();
+	$("#username").val("");
+	$("#password").val("");
+});
+function f()
+{
+	var username;
+	username = document.getElementById("username");
+	username.value = (username.value.toLowerCase());
+	//get the form id and submit it
+	var form = document.getElementById("pageForm");
+	form.submit();
+	return true;
+}
+</script>
+<div id="content">
+	<h1>Gateway > Login</h1>
+	<div id="educational-tip">
+		<p class="tip">Please login to view your Wi-Fi passkey or to view and edit detailed network settings.</p>
+	</div>
+<div class="module block" id="wifi-config"><div><h2>Wi-Fi Configuration</h2></div><div class="form-row even"><div class="form-row even"><span class="readonlyLabel">Wi-Fi SSID (2.4GHz):</span><span style="font-weight: bold; white-space: pre;" class="value">HELLO_WORLD</span></div><div class="form-row even"><span class="readonlyLabel">Wi-Fi Passkey (2.4GHz):</span><span class="value">Log in to view passkey</span></div></div><div class="form-row odd"><div class="form-row even"><span class="readonlyLabel">Wi-Fi SSID (5GHz):</span><span style="font-weight: bold; white-space: pre;" class="value">HELLO_WORLD</span></div><div class="form-row odd"><span class="readonlyLabel">Wi-Fi Passkey (5GHz):</span><span class="value">Log in to view passkey</span></div></div></div><div class="module block" id="home-network"><div><h2>Home Network</h2><div class="form-row"><span class="on-off sprite_cont"><img src="./cmn/img/icn_on_off.png" alt='Ethernet On' /></span> <span class="readonlyLabel">Ethernet</span></div><div class="form-row odd"><span class="on-off sprite_cont"><img src="./cmn/img/icn_on_off.png" alt='Wi-Fi On' /></span> <span class="readonlyLabel">Wi-Fi</span></div><div class="form-row off"><span class="on-off sprite_cont"><img src="./cmn/img/icn_on_off.png" alt='MoCA Off' /></span> <span class="readonlyLabel">MoCA</span></div>			<div class="form-row odd">
+				<span class="readonlyLabel">Firewall Security Level:</span> <span class="value">Low</span>
+			</div>
+		</div>
+	</div> <!-- end .module -->
+	<div id="internet-usage" class="module form">
+		<h2 style="margin-bottom: -5px;">Connected Devices</h2>
+		<table class="data" summary="This table displays Online Devices connected">
+		    <tr>
+			<th style="background: #f85f01;" id="active-icon" ></th>
+			<th style="background: #f85f01;" id="host-name" >Host Name</th>
+			<th style="background: #f85f01;" id="mac-address" >MAC Address</th>
+			<th style="background: #f85f01;" id="connection-type" >Connection Type</th>
+		    </tr>
+		<tr class='form-row '>
+							<td width='5%' class='readonlyLabel' headers='active-icon'><span class="on-off sprite_cont"><img src="./cmn/img/icn_on_off.png" alt='Host On' /></span></td>
+							<td width='40%' class='readonlyLabel' headers='host-name'>TPLINK</td>
+							<td width='' class='readonlyLabel' headers='mac-address'>A0:F3:C1:00:00:00</td>
+							<td width='' class='readonlyLabel' headers='connection-type'>Wi-Fi 2.4G</td>
+						      </tr>
+						<tr class='form-row odd'>
+							<td width='5%' class='readonlyLabel' headers='active-icon'><span class="on-off sprite_cont"><img src="./cmn/img/icn_on_off.png" alt='Host On' /></span></td>
+							<td width='40%' class='readonlyLabel' headers='host-name'>Colbys-iPhone</td>
+							<td width='' class='readonlyLabel' headers='mac-address'>18:65:90:00:00:00</td>
+							<td width='' class='readonlyLabel' headers='connection-type'>Wi-Fi 2.4G</td>
+						      </tr>
+						<tr class='form-row '>
+							<td width='5%' class='readonlyLabel' headers='active-icon'><span class="on-off sprite_cont"><img src="./cmn/img/icn_on_off.png" alt='Host On' /></span></td>
+							<td width='40%' class='readonlyLabel' headers='host-name'>Carloss-iPhone</td>
+							<td width='' class='readonlyLabel' headers='mac-address'>48:A9:1C:00:00:00</td>
+							<td width='' class='readonlyLabel' headers='connection-type'>Wi-Fi 2.4G</td>
+						      </tr>
+						<tr class='form-row odd'>
+							<td width='5%' class='readonlyLabel' headers='active-icon'><span class="on-off sprite_cont"><img src="./cmn/img/icn_on_off.png" alt='Host On' /></span></td>
+							<td width='40%' class='readonlyLabel' headers='host-name'>Colbys-Air</td>
+							<td width='' class='readonlyLabel' headers='mac-address'>70:56:81:00:00:00</td>
+							<td width='' class='readonlyLabel' headers='connection-type'>Wi-Fi 2.4G</td>
+						      </tr>
+						<tr class='form-row '>
+							<td width='5%' class='readonlyLabel' headers='active-icon'><span class="on-off sprite_cont"><img src="./cmn/img/icn_on_off.png" alt='Host On' /></span></td>
+							<td width='40%' class='readonlyLabel' headers='host-name'>amazon-4d73d5f06</td>
+							<td width='' class='readonlyLabel' headers='mac-address'>CC:9E:A2:00:00:00</td>
+							<td width='' class='readonlyLabel' headers='connection-type'>Wi-Fi 2.4G</td>
+						      </tr>
+						<tr class='form-row odd'>
+							<td width='5%' class='readonlyLabel' headers='active-icon'><span class="on-off sprite_cont"><img src="./cmn/img/icn_on_off.png" alt='Host On' /></span></td>
+							<td width='40%' class='readonlyLabel' headers='host-name'>Amandas-iPhone</td>
+							<td width='' class='readonlyLabel' headers='mac-address'>20:EE:28:00:00:00</td>
+							<td width='' class='readonlyLabel' headers='connection-type'>Wi-Fi 2.4G</td>
+						      </tr>
+						<tr class='form-row '>
+							<td width='5%' class='readonlyLabel' headers='active-icon'><span class="on-off sprite_cont"><img src="./cmn/img/icn_on_off.png" alt='Host On' /></span></td>
+							<td width='40%' class='readonlyLabel' headers='host-name'>Amandas-MBP-2</td>
+							<td width='' class='readonlyLabel' headers='mac-address'>80:E6:50:00:00:00</td>
+							<td width='' class='readonlyLabel' headers='connection-type'>Wi-Fi 5G</td>
+						      </tr>
+								</table>
+			</div> <!-- end .module -->
+	<!--div class="module">
+		<div class="select-row">
+			<span class="readonlyLabel label">IGMP Snooping:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+						<ul id="IGMP_snooping_switch" class="radio-btns enable">
+				<li>
+					<input id="IGMP_snooping_enabled" name="IGMP_snooping" type="radio"  value="Enabled"/>
+					<label for="IGMP_snooping_enabled" >Enable </label>
+				</li>
+				<li class="radio-off">
+					<input id="IGMP_snooping_disabled" name="IGMP_snooping" type="radio"  value="Disabled" checked="checked"/>
+					<label for="IGMP_snooping_disabled" >Disable </label>
+				</li>
+			</ul>
+					</div>
+	</div-->
+</div><!-- end #content -->
+<!-- $Id: footer.php 2976 2009-09-02 21:42:51Z cporto $ -->
+		</div> <!-- end #main-content-->
+		<!--Footer-->
+		<div id="footer">
+			<ul id="footer-links">
+				<li class="first-child"><a href="http://www.xfinity.com" target="_blank">Xfinity.com</a></li>
+				<li style="list-style:none outside none; margin-left:10px">&#8226;&nbsp;&nbsp;<a href="https://customer.comcast.com/" target="_blank">customerCentral</a></li>
+				<li style="list-style:none outside none; margin-left:10px">&#8226;&nbsp;&nbsp;<a href="http://customer.comcast.com/userguides" target="_blank">User Guide</a></li>
+			</ul>
+		</div> <!-- end #footer -->
+	</div> <!-- end #container -->
+<script type="text/javascript">
+$(document).ready(function() {
+	// focus current page link, must after page.init()
+	//$('#nav [href="'+location.href.replace(/^.*\//g, '')+'"]').focus();		// need a "skip nav" function
+	$("#skip-link").click(function () {
+        $('#content').attr('tabIndex', -1).focus();  //this is to fix skip-link doesn't work on webkit-based Chrome
+    });
+	// change radio-btn status and do ajax when press "enter"
+	//$(".radio-btns a").keydown(function(event){
+	$(".radio-btns a").keypress(function(event){
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if(13 == keycode){
+			if (!$(this).parent(".radio-btns").find("li").hasClass("selected")){
+				return;		// do nothing if has disabled class, don't detect disabled attr for radio-btn
+			}
+			// console.log($(this).find(":radio").hasClass("disabled"));
+			$(this).find(":radio").trigger('click');
+			$(this).find(":radio").trigger('change');
+			$(this).parent(".radio-btns").radioToButton();
+		}
+	});
+	// press Esc to skip menu and goto first control of content
+	// Esc:keypress:which is zero in FF, Esc:keypress is not work in Chrome
+	$("#nav").keydown(function(event){
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if(27 == keycode){
+			$("#content textarea:eq(0)").focus();
+			$("#content input:eq(0)").focus();
+			$("#content a:eq(0)").focus();			// high priority element to focus			
+		}
+		// alert(event.keyCode+"---"+event.which+"---"+event.charCode);		
+	});
+	/* changes for high contrast mode */
+	$.highContrastDetect({useExtraCss: true, debugInNormalMode: false});
+	if ($.__isHighContrast) {
+		/* change plus/minus tree indicator of nav menu */
+		$("#nav a.top-level").prepend('<span class="hi_nav_top_indi">[+]</span>');
+		$("#nav a.folder").prepend('<span class="hi_nav_folder_indi">[+]</span>');
+		$("#nav a.top-level-active span.hi_nav_top_indi").text("[-]");
+		$("#nav a.folder").click(function() {
+			/* this should be called after nav state changed */
+			var $link = $(this);
+			if ($link.hasClass("folder-open")) {
+				$link.children("span.hi_nav_folder_indi").text("[-]");
+			}
+			else {
+				$link.children("span.hi_nav_folder_indi").text("[+]");
+			}
+		});
+	}
+	/*
+	*	these 3 sections for radio-btn accessibility, as a workaround, maybe should put at the front of .ready().
+	*/
+	// add "role" and "title" for ARIA, attr may need to be embedded into html
+	$(".radio-btns a").each(function(){
+		$(this).attr("role", "radio").attr("title", $(this).closest("ul").prev().text() + $(this).find("label").text());
+	});
+	// monitor "aria-checked" status for JAWS, NOTE: better depends on input element
+	$(".radio-btns").change(function(){
+		$(this).find("a").each(function(){
+			$(this).attr("aria-checked", $(this).find("input").attr("checked") ? "true" : "false");
+		});
+	});
+	//give the initial status, do not trigger change above
+	$(".radio-btns").find("a").each(function(){
+		$(this).attr("aria-checked", $(this).find("input").attr("checked") ? "true" : "false");
+	});
+});
+</script>	
+</body>
+</html>
