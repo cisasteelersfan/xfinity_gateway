@@ -1,4 +1,5 @@
-from xfinity_gateway import XfinityGateway
+from src.xfinity_gateway.xfinity_gateway import XfinityGateway
+import asyncio
 import logging
 
 import voluptuous as vol
@@ -22,11 +23,12 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 })
 
 
-def get_scanner(hass, config):
+async def async_get_scanner(hass, config):
     info = config[DOMAIN]
     host = info.get(CONF_HOST)
 
     scanner = XfinityDeviceScanner(host)
+    await scanner._connect()
 
     return scanner if scanner.success_init else None
 
@@ -41,13 +43,20 @@ class XfinityDeviceScanner(DeviceScanner):
             print("!!!!!! Error setting up gateway")
             pass
 
-    def scan_devices(self):
-        return self.xfinity_gateway.scan_devices()
+    async def async_scan_devices(self):
+        return await self.xfinity_gateway.scan_devices()
 
-    def get_device_name(self, device):
+    async def async_get_device_name(self, device):
         return self.xfinity_gateway.get_device_name(device)
 
-device = XfinityDeviceScanner('10.0.0.1')
 
-print(device.scan_devices())
-print(device.get_device_name('18:65:90:00:00:00'))
+
+if __name__ == '__main__':
+    async def run():
+        device = XfinityDeviceScanner('10.0.0.1')
+
+        print(await device.async_scan_devices())
+        print(await device.async_get_device_name('18:65:90:00:00:00'))
+    
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(asyncio.gather(run()))
