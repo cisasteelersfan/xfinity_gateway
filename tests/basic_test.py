@@ -11,7 +11,7 @@ class TestXfinity(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        with open('./xfinityTestPage.html', 'r') as fh:
+        with open('./tests/xfinityTestPage.html', 'r') as fh:
             cls.test_xfinity_page = fh.read()
 
 
