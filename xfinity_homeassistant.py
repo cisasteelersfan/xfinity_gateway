@@ -50,7 +50,7 @@ class XfinityDeviceScanner(DeviceScanner):
 
 
 if __name__ == '__main__':
-    device = XfinityDeviceScanner('10.0.0.2')
+    device = XfinityDeviceScanner('10.0.0.1')
 
     print(device.scan_devices())
     print(device.get_device_name('18:65:90:00:00:00'))

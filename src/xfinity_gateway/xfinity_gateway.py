@@ -22,11 +22,15 @@ class XfinityGateway:
         self._get_lxml(raw_html)
 
     def _get_lxml(self, html):
-        parsed_doc = lxml.html.document_fromstring(html)
-        
-        rows = parsed_doc.get_element_by_id('internet-usage').find_class('form-row')
+        try:
+            parsed_doc = lxml.html.document_fromstring(html)
+            
+            rows = parsed_doc.get_element_by_id('internet-usage').find_class('form-row')
 
-        self.last_results = dict([(row.find_class('readonlyLabel')[2].text_content(), row.find_class('readonlyLabel')[1].text_content()) for row in rows])
+            self.last_results = dict([(row.find_class('readonlyLabel')[2].text_content(), row.find_class('readonlyLabel')[1].text_content()) for row in rows])
+        except:
+            raise(ValueError())
+
 
 if __name__ == '__main__':
     device = XfinityGateway('10.0.0.1')
