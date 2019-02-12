@@ -6,3 +6,4 @@ install:
    - pip install --dev
 script:
    - python tests/basic_test.py
+   
