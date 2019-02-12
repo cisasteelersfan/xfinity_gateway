@@ -26,6 +26,6 @@ I have only tested on my own Xfinity-provided gateway:
 | Hardware Revision: | 9.0 |
 
 If your gateway's web interface looks like the following, this library will likely work:
-![xfinity interface](images/xfinity_interface.png)
+![xfinity interface](https://i.imgur.com/4Jlcshl.png)
 
 Please open a Github issue if you encounter any problems. Thanks!
