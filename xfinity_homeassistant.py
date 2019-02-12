@@ -1,4 +1,3 @@
-from src.xfinity_gateway import XfinityGateway
 import logging
 
 from requests.exceptions import RequestException
@@ -8,6 +7,8 @@ import homeassistant.helpers.config_validation as cv
 from homeassistant.components.device_tracker import (
     DOMAIN, PLATFORM_SCHEMA, DeviceScanner)
 from homeassistant.const import CONF_HOST
+
+REQUIREMENTS = ['quantum-gateway']
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -33,6 +34,8 @@ class XfinityDeviceScanner(DeviceScanner):
 
     def __init__(self, address):
         """Initialize the scanner."""
+        from xfinity_gateway import XfinityGateway
+
         try:
             _LOGGER.debug('Initializing')
             self.gateway = XfinityGateway(address)

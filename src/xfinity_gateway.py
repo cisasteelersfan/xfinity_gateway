@@ -1,4 +1,3 @@
-from bs4 import BeautifulSoup as BS
 import lxml.html
 import requests
 

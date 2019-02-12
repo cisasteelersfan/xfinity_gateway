@@ -19,6 +19,7 @@ gateway.get_device_name('mac address of device here')
 ## Thoughts
 
 I have only tested on my own Xfinity-provided gateway:
+
 | | |
 | --- | --- |
 | Model: | TG1682G |
