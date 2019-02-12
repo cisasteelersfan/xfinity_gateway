@@ -2,7 +2,7 @@ import unittest
 import requests_mock
 import requests
 import sys
-sys.path.append('/home/colby/development/xfinity_scanner/src/xfinity_gateway')
+sys.path.append('/home/colby/development/xfinity_scanner/src')
 from xfinity_gateway import XfinityGateway
 
 @requests_mock.Mocker()

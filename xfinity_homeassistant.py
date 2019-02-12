@@ -1,4 +1,4 @@
-from src.xfinity_gateway.xfinity_gateway import XfinityGateway
+from src.xfinity_gateway import XfinityGateway
 import logging
 
 from requests.exceptions import RequestException
