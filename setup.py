@@ -8,7 +8,7 @@ with open('requirements.txt', 'r') as fh:
 
 setup(
     name='xfinity_gateway',
-    version='0.0.1',
+    version='0.0.3',
     author='Colby Rome',
     author_email='colbyrome@gmail.com',
     description='Query an Xfinity Gateway',

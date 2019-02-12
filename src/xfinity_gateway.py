@@ -1,4 +1,4 @@
-import lxml.html
+from bs4 import BeautifulSoup as BS
 import requests
 
 TIMEOUT = 10
@@ -18,20 +18,15 @@ class XfinityGateway:
 
     def _update_info(self):
         raw_html = requests.get(self.host, timeout=TIMEOUT).text
-        self._get_lxml(raw_html)
+        self._get_connected_devices(raw_html)
 
-    def _get_lxml(self, html):
+    def _get_connected_devices(self, html):
         try:
-            parsed_doc = lxml.html.document_fromstring(html)
-            
-            rows = parsed_doc.get_element_by_id('internet-usage').find_class('form-row')
+            soup = BS(html, 'html.parser')
+            headers = soup.find(id='internet-usage').table.tr
 
-            self.last_results = dict([(row.find_class('readonlyLabel')[2].text_content(), row.find_class('readonlyLabel')[1].text_content()) for row in rows])
+            entries = [x for x in headers.next_siblings if x != '\n']
+
+            self.last_results = dict([(e.find(headers='mac-address').text, e.find(headers='host-name').text) for e in entries])
         except:
             raise(ValueError())
-
-
-if __name__ == '__main__':
-    device = XfinityGateway('10.0.0.1')
-    print(device.scan_devices())
-    print(device.get_device_name('18:65:90:00:00:00'))

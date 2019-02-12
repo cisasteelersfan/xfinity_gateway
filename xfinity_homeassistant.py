@@ -8,7 +8,7 @@ from homeassistant.components.device_tracker import (
     DOMAIN, PLATFORM_SCHEMA, DeviceScanner)
 from homeassistant.const import CONF_HOST
 
-REQUIREMENTS = ['quantum-gateway']
+REQUIREMENTS = ['xfinity-gateway==0.0.3']
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -57,11 +57,3 @@ class XfinityDeviceScanner(DeviceScanner):
     def get_device_name(self, device):
         """Return the name of the given device or None if we don't know."""
         return self.gateway.get_device_name(device)
-
-
-
-if __name__ == '__main__':
-    device = XfinityDeviceScanner('10.0.0.1')
-
-    print(device.scan_devices())
-    print(device.get_device_name('18:65:90:00:00:00'))
