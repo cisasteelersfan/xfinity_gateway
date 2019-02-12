@@ -2,6 +2,9 @@
 
 This library allows an Xfinity Gateway to be queried for connected devices. It uses the `requests` library to scrape the web interface of the gateway.
 
+## Installation
+`pip install xfinity_gateway`
+
 ## Usage
 ```python
 from xfinity_gateway import XfinityGateway
@@ -28,4 +31,4 @@ I have only tested on my own Xfinity-provided gateway:
 If your gateway's web interface looks like the following, this library will likely work:
 ![xfinity interface](https://i.imgur.com/4Jlcshl.png)
 
-Please open a Github issue if you encounter any problems. Thanks!
+Please open a Github [issue](https://github.com/cisasteelersfan/xfinity_gateway/issues) if you encounter any problems. Thanks!
