@@ -1,31 +1,32 @@
 import unittest
-from aioresponses import aioresponses
-import asyncio
+import requests_mock
 import sys
 sys.path.append('/home/colby/development/xfinity_scanner/src/xfinity_gateway')
 from xfinity_gateway import XfinityGateway
 
+@requests_mock.Mocker()
 class TestXfinity(unittest.TestCase):
 
-    def test_something(self):
-        assert(1==1)
+    URL = 'http://10.0.0.1'
 
-    @aioresponses()
-    def test_helloworld(self, m):
-        f = open('./xfinityTestPage.html', 'r')
-        text = f.read()
-        f.close()
-        m.get('http://10.0.0.1', status=200, body=text, repeat=True)
+    @classmethod
+    def setUpClass(cls):
+        with open('./xfinityTestPage.html', 'r') as fh:
+            cls.test_xfinity_page = fh.read()
+
+
+    def setup_matcher_valid(self, m):
+        m.get(self.URL, text=self.test_xfinity_page)
+
+
+    def test_get_device_name_valid(self, m):
+        self.setup_matcher_valid(m)
 
         gateway = XfinityGateway('10.0.0.1')
+        gateway.scan_devices()
 
-        async def run():
-            await gateway._connect()
-            print(await gateway.scan_devices())
-            print(gateway.get_device_name('18:65:90:00:00:00'))
+        self.assertEqual(gateway.get_device_name('18:65:90:00:00:00'), 'Colbys-iPhone')
 
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(asyncio.gather(run()))
 
 if __name__ == '__main__':
     unittest.main()
