@@ -1,2 +1,2 @@
 requests>=2.20
-lxml>=4.3
+beautifulsoup4>=4.0
