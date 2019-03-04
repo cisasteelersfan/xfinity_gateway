@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup as BS
 import requests
 
-TIMEOUT = 10
+TIMEOUT = 30
 
 class XfinityGateway:
 
